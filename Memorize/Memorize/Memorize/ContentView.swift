@@ -1,7 +1,7 @@
 //
 //  ContentView.swift
 //  Memorize
-//
+// Version 1.1: Make multipy of rectangles
 //  Created by fujie on 2022/7/7.
 //
 
@@ -22,6 +22,7 @@ struct ContentView: View {
         }
         .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
         .foregroundColor(.blue)
+        
 
 
     }
