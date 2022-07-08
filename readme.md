@@ -103,4 +103,11 @@ extension Array{
         static let fontScale:CGFloat=0.8
     }
 ```
+## Lecture 6
+1. protocol
+- used as types, but not all protocols can be used as types
+- used to specify the *behavior* of class and struct
+- turn don't-care type into some-care type, behave like some protocol
+- to restrict extension to only work on certain things
+- the most powerful use of protocol is facilitate *code sharing*
 
