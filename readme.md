@@ -35,7 +35,7 @@ var emptyDict:[String:Float]=[:]
 5. @State var xx: turn xx into pointer, so we can change value of xx. By default, we can't change value of variables in a SwiftUI, no matter we define them as `var` or `let`.
 6. Apple provide a lot of symbols for SwiftUI, we can find the name of these UI in SF-Symbols app. Then we can include these UI in our code by using their name: `Image(systemName: "plus.circle.fill")`
 
-## Lecture 3: MVVM
+## Lecture 3 & 4: MVVM
 1. six main types in Swift
 - *struct*
 - *class*
@@ -71,3 +71,36 @@ let result = operation(4) // result equal to 16
 - use keywords `@Published` in front of the variable inside the class
 - use keywords `@ObservedObject` in front of the variable inside the ContentViews
 7. to loop an Array and find hit target: `cards.firstIndex(where: {$0.id==card.id})`
+
+## Lecture 5
+1. Views in Swift are read-only
+2. `@State`: rebuild the views whenever some variable changes, it's can only be private
+3. we can use `extension` to add function or variable to existing class or struct
+```
+extension Array{
+    var oneAndOnly: Element?{
+        if self.count==1{
+            return first
+        }else {
+            return nil
+        }
+    }
+}
+```
+4. calculated value has get and set method, use functional programming to reduce codes
+```
+    private var indexOfTheOneAndOnlyFaceUpCard: Int?{
+        get{cards.indices.filter({cards[$0].isFaceUp}).oneAndOnly}
+        set{cards.indices.forEach{cards[$0].isFaceUp=($0==newValue)}} // newValue is keyword
+    }
+```
+5. create some constants to make our UI the way we want:
+```
+    // some contants used to make UI the way we want
+    private struct DrawingConstants{
+        static let cornerRadius: CGFloat=20
+        static let lineWidth:CGFloat=3
+        static let fontScale:CGFloat=0.8
+    }
+```
+

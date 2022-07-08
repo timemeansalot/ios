@@ -12,10 +12,12 @@ import SwiftUI
 // when model changes, re_render the UI
 class EmojiMemoryGame: ObservableObject{
     
-    static  let emojis=["🚒","🚑","🛻","🚜","🛺","🚝","🚖","🚃",
+    typealias Card=MemoryGame<String>.Card // create name alias
+    
+    private static  let emojis=["🚒","🚑","🛻","🚜","🛺","🚝","🚖","🚃",
                 "🚁","🚀","🛳","🚢","🚤","🛰","🚇","🗼"]
-    static func createMemoryGame()->MemoryGame<String>{
-        MemoryGame<String>(numberOfpairsOfCard: 4){
+    private static func createMemoryGame()->MemoryGame<String>{
+        MemoryGame<String>(numberOfpairsOfCard: 8){
             pairIndex in emojis[pairIndex]
         }
     }
@@ -26,14 +28,14 @@ class EmojiMemoryGame: ObservableObject{
 //        emojis[pairIndex]
 //    }
     // the @Published keyword is used  to re_rerender the UI when model changes 
-    @Published private var model: MemoryGame<String> = createMemoryGame()
+    @Published private var model = createMemoryGame()
     
-    var cards: Array<MemoryGame<String>.Card>{
+    var cards: Array<Card>{
         return model.cards
     }
     
     // MARK: - Intent(s)
-    func choose(_ card: MemoryGame<String>.Card){
+    func choose(_ card: Card){
 //        objectWillChange.send() // re_render UI when object change
         model.choose(card)
     }

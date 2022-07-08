@@ -12,8 +12,37 @@ import Foundation // for basic stuff like: Array, String and Dict, etc
 struct MemoryGame<CardContent> where CardContent: Equatable{
     private(set) var cards: Array<Card>
     
-    private var indexOfTheOneAndOnlyFaceUpCard: Int? // optional type, init by nil in default
-    
+//    version 1.0: private var indexOfTheOneAndOnlyFaceUpCard: Int? // optional type, init by nil in default
+    // version 1.1: calculate the indexOfTheOneAndOnlyFaceUpCard
+//    private var indexOfTheOneAndOnlyFaceUpCard: Int?{
+//        get{
+//            var faceUpIndices=[Int]()
+//            for index in cards.indices{
+//                if cards[index].isFaceUp{
+//                    faceUpIndices.append(index)
+//                }
+//            }
+//            if faceUpIndices.count==1{
+//                return faceUpIndices[0] // there is one value in faceUpIndices, return it
+//            }else {
+//                return nil // there is nothing in faceUpIndices, means no card is face up, return nil
+//            }
+//        }
+//        set{
+//            for index in cards.indices{
+//                if index != newValue{
+//                    cards[index].isFaceUp=false
+//                }else {
+//                    cards[index].isFaceUp=true
+//                }
+//            }
+//        }
+//    }
+    // version 1.2: function programming to minimize codes
+    private var indexOfTheOneAndOnlyFaceUpCard: Int?{
+        get{cards.indices.filter({cards[$0].isFaceUp}).oneAndOnly}
+        set{cards.indices.forEach{cards[$0].isFaceUp=($0==newValue)}}
+    }
     // card: Card is redundent, so we don't need to use label at this time
     // mutating is used explicity say we want a function to mutate variables in struct.
     mutating func choose(_ card: Card) {
@@ -27,14 +56,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                     cards[potentialIndex].isMatched=true
                     cards[chosenIndex].isMatched=true
                 }
-                indexOfTheOneAndOnlyFaceUpCard=nil
+                cards[chosenIndex].isFaceUp=true
             }else {
-                for index in cards.indices{
-                    cards[index].isFaceUp=false
-                }
                 indexOfTheOneAndOnlyFaceUpCard=chosenIndex
             }
-            cards[chosenIndex].isFaceUp.toggle()
         }
     }
     
@@ -51,7 +76,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     // init function for struct
     // createCardContent is a function which inputs an Int and outputs a CardContent, it's used to create a content which is used for initilize Card
     init(numberOfpairsOfCard: Int,createCardContent:(Int)->CardContent){
-        cards=Array<Card>()
+        cards=[]
         
         for pairIndex in 0..<numberOfpairsOfCard{
             let content=createCardContent(pairIndex)
@@ -64,10 +89,22 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     // define a Card which is used for the MemoryGame, so we declare thme right inside the struct MemoryGame
     struct Card: Identifiable{
         
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
-        var content: CardContent // don't-care type
-        var id: Int
+        var isFaceUp = false
+        var isMatched = false
+        let content: CardContent // don't-care type
+        let id: Int
 
+    }
+}
+ 
+
+// extension for Array, so we add a variable called oneAndOnly into Array
+extension Array{
+    var oneAndOnly: Element?{
+        if self.count==1{
+            return first
+        }else {
+            return nil
+        }
     }
 }
