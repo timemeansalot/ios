@@ -65,3 +65,9 @@ operation = square // functions are just type like other type in Swift
 let result = operation(4) // result equal to 16
 ```
 4. to declare a function: `parameter in body`, the keyword `in` seperate the parameter and the body.
+5. we must use keywords `mutating` to explicity specify when want change variables in a struct, while we don't need to do that for class.
+6. if we want to re_render UI whenever the model changes, we:
+- define the view model class as type of ObservableObject
+- use keywords `@Published` in front of the variable inside the class
+- use keywords `@ObservedObject` in front of the variable inside the ContentViews
+7. to loop an Array and find hit target: `cards.firstIndex(where: {$0.id==card.id})`
