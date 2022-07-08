@@ -24,3 +24,12 @@ var emptyArray:[String]=[]
 var emptyDict:[String:Float]=[:]
 ```
 > conclusion: Swift is cares much about type, it's not like Python which does a lot of implicity type conversion for programmers.
+
+# Stanford Class for SwiftUI
+## Lecture 1 & 2
+1. hold option key and click a variable in Swift, you can get a brief about the variablein Swift.
+2. ForEach
+3. VStack, HStack, ZStack, LazyVGrid
+4. Text, Button(action:{},label:{}), Image, Spacer, padding, onTapGesture
+5. @State var xx: turn xx into pointer, so we can change value of xx. By default, we can't change value of variables in a SwiftUI, no matter we define them as `var` or `let`.
+6. Apple provide a lot of symbols for SwiftUI, we can find the name of these UI in SF-Symbols app. Then we can include these UI in our code by using their name: `Image(systemName: "plus.circle.fill")`
