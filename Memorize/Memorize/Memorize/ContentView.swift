@@ -30,37 +30,11 @@ struct ContentView: View {
             }
             .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
             .foregroundColor(.red)
-            Spacer()
-            HStack{
-                removeCard
-                Spacer()
-                addCard
-                
-            }
-            .font(.largeTitle)
-            .padding(.horizontal)
         }
         
     }
     
-    var removeCard: some View{
-        Button(action: {
-                if emojiCount>1{
-                    emojiCount-=1
-                }
-            }, label: {
-            Image(systemName: "minus.circle.fill")
-        })
-    }
-    var addCard: some View{
-        Button(action: {
-            if emojiCount<emojis.count{
-                emojiCount+=1}
-            
-        }, label: {
-            Image(systemName: "plus.circle.fill")
-        })
-    }
+
 }
 
 struct CardView: View{
