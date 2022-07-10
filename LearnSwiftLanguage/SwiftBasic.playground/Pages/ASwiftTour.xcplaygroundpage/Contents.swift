@@ -1,6 +1,7 @@
 //:# This Guide is leart from [A Swfit Tour](https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html)
 
 import Foundation
+import _Concurrency
 
 
 
@@ -239,3 +240,120 @@ class Square : namedShape{
 var mySquare=Square(sideLength: 30.33, name: "FMT", sides: 23)
 print("show mySqure: ")
 print(mySquare.simpleInfo())
+
+
+//:## Enumeration and Structures
+enum Rank: Int {
+    case ace = 1 // set raw value of items in Enum, each items floowing will increase the rawValue by 1
+    case two, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king
+
+    func simpleDescription() -> String {
+        switch self {
+        case .ace:
+            return "ace"
+        case .jack:
+            return "jack"
+        case .queen:
+            return "queen"
+        case .king:
+            return "king"
+        default:
+            return String(self.rawValue)
+        }
+    }
+}
+let ace = Rank.ace
+let aceRawValue = ace.rawValue
+print(aceRawValue)
+
+func compareRawValue(left: Rank, right: Rank)-> Bool{
+    return left.rawValue>right.rawValue
+}
+let two=Rank.two
+print(compareRawValue(left: ace, right: two))
+
+
+// another enum example
+enum Suit {
+    case spades, hearts, diamonds, clubs
+
+    func simpleDescription() -> String {
+        switch self {
+        case .spades:
+            return "spades"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diamonds"
+        case .clubs:
+            return "clubs"
+        }
+    }
+    
+    func color()->String {
+        switch self{
+        case .spades,.clubs:
+            return "black"
+        case .hearts,.diamonds:
+            return "red"
+        }
+    }
+}
+let hearts = Suit.hearts // type is Suit
+let heartsDescription = hearts.simpleDescription() // type is String
+let blackOrRed = hearts.color()
+print(hearts,heartsDescription)
+print(blackOrRed)
+
+//: ### The main difference between struct and class is that: structs are always pass by value while classes are always pass by referrence
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+}
+let threeOfSpades = Card(rank: Rank.three, suit: Suit.spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+print(threeOfSpadesDescription)
+
+
+//: ## Concurrency
+////: use `async` to mark a function that runs synchronously
+//func fetchUserID(from server: String) async ->Int{
+//    if server=="primary"{
+//        return 97
+//    }else {
+//        return 501
+//    }
+//}
+////: call an asynchronous function by adding `await` in front of it
+//func fetchUsername(from server: String) async -> String{
+//    let userID=await fetchUserID(from: server)
+//    if userID==501{
+//        return "John Applessed"
+//    }else{
+//        return "Guest"
+//    }
+//}
+//
+////: use `async let` to run functions in parallel
+//func connectUser(to server: String) async {
+//    async let userID=fetchUserID(from: server)
+//    async let username=fetchUsername(from: server)
+//    let greeing = await "Hello \(username), user ID \(userID)" // use value returnd from sync functions must add `await`
+//    print(greeing)
+//}
+//
+////: use Tasks to call aysnchronouns functions
+//Task{
+//    await connectUser(to: "primary")
+//}
+
+
+
+
+//: ## Protocols and Extensions
+
