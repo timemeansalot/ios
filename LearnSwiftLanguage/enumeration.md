@@ -14,6 +14,13 @@ var myEnum=CompassPoint.north
 print(myEnum)
 print(myEnum.rawValue)
 ```
+> By default, the rowValue of `int` or `Double` type is stated at 0, the rawValue of `String` is set to match the case name.
+
+we can create a enum variable by rawValue
+```
+var secondCase=CompassPoint(rawValue: 1)
+print(secondCase!)
+```
 3. We must provide a type for enumeration then we can add rawValue to it. If we don't add rawValue, Swift will set the default rawValue to 0 for us.
 ```
 enum CompassPoint: Int{ // set type to be int, then I can set rawValue
@@ -66,3 +73,35 @@ default:
 }
 ```
 
+6. Enumeration is not iterable by default, we can make it inherit from *CaseIterable* to make it iterable, because at that time it will have a method called *allCases*
+
+7. recursive enumeration: **call the enumeration inside the enum body, use keyword `indirect`**
+```
+//: # recursive enumerations, use keyword `indirect`
+indirect enum calculate{
+    case number(Int)
+    
+    // recursive part
+    case add(calculate,calculate)
+    case minus(calculate,calculate)
+}
+
+let op1=calculate.number(1)
+let op2=calculate.number(2)
+let sum=calculate.add(op1, op2)
+print(sum)
+
+// function to calculate value of the above enumeration
+func evaluate(_ experssion: calculate)->Int{
+    switch experssion{
+    case let .number(value):
+        return value
+    case let .add(left, right):
+        return evaluate(left)+evaluate(right)
+    case let .minus(left, right):
+        return evaluate(left)-evaluate(right)
+    }
+}
+
+print(evaluate(sum))
+```
