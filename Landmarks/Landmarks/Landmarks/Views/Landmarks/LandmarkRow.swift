@@ -15,12 +15,18 @@ struct LandmarkRow: View {
             landmark.image.resizable().frame(width: 50, height: 50)
             Text(landmark.name)
             Spacer()
+            
+            if landmark.isFavorite{
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }
 
 // PreviewProvider is a protocol
 struct LandmarkRow_Previews: PreviewProvider {
+    static var landmarks=ModelData().landmarks
     static var previews: some View {
         // use group to return multiple previews, so there could be multiple views shown in the preview windows
         Group {

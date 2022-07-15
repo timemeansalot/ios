@@ -8,8 +8,12 @@
 import Foundation
 import SwiftUI
 
-//an array of landmarks which initialized from json file
-var landmarks: [Landmark] = load("landmarkData.json")
+final class ModelData: ObservableObject{
+    // publish any changes to data, so subscribers can pick up data change
+    @Published var landmarks: [Landmark] = load("landmarkData.json")//an array of landmarks which initialized from json file
+}
+
+
 
 
 // load data from json file with a given name
