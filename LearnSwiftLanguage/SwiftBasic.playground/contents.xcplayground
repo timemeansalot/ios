@@ -3,5 +3,7 @@
     <pages>
         <page name='ASwiftTour'/>
         <page name='Enumerations'/>
+        <page name='Collections'/>
+        <page name='StructuresAndClasses'/>
     </pages>
 </playground>
