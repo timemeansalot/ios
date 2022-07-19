@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LandmarkList: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var modelData: ModelData // using object passed from parent view
     @State private var showFavoritesOnly = false
     
     var filteredLandmarks:[Landmark]{
@@ -22,17 +22,17 @@ struct LandmarkList: View {
         // no more need the id parameter
         NavigationView{
             List{
-                Toggle(isOn: $showFavoritesOnly){
-                    Text("Favorites Only")
-                }
-                ForEach(filteredLandmarks){landmark in
-                    NavigationLink{
-                        LandmarkDetail(landmark: landmark) // destination
-                    }label: {
-                        LandmarkRow(landmark: landmark)
+                    Toggle(isOn: $showFavoritesOnly){
+                        Text("Favorites Only")
+                    }
+                    ForEach(filteredLandmarks){landmark in
+                        NavigationLink{
+                            LandmarkDetail(landmark: landmark) // destination
+                        }label: {
+                            LandmarkRow(landmark: landmark)
+                        }
                     }
                 }
-            }
             .navigationTitle("Landmarks") // set the title of navitation bar
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var modelData: ModelData // get the object passed from parent view, so we can modify the origin data in this view
     var landmark: Landmark
     
     var landmarkIndex: Int{
@@ -29,7 +29,7 @@ struct LandmarkDetail: View {
                 HStack {
                     Text(landmark.name)
                         .font(.title)
-                    FavoriteBotton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+                    FavoriteBotton(isSet: $modelData.landmarks[landmarkIndex].isFavorite) // creat a FavoriteButton and binding it to isFavorite property of current landmark object
                 }
 
                 HStack {

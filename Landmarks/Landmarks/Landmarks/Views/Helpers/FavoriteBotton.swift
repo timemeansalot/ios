@@ -12,8 +12,9 @@ struct FavoriteBotton: View {
     
     var body: some View {
         Button{
-            isSet.toggle()
+            isSet.toggle() // action of Button when click: change true to false or change false to true.
         }label: {
+            // apperance of Button
             Label("Toggle Favorite",systemImage: isSet ? "star.fill":"star")
                 .labelStyle(.iconOnly)
                 .foregroundColor(isSet ? .yellow:.gray)

@@ -9,6 +9,8 @@ import SwiftUI
 
 // define the view windows, which we will use in our program
 struct ContentView: View {
+    
+    @EnvironmentObject var modelData: ModelData // using the object passed from parent view
     var body: some View {
         LandmarkList()
     }

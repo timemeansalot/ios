@@ -31,7 +31,7 @@ struct LandmarkRow_Previews: PreviewProvider {
         // use group to return multiple previews, so there could be multiple views shown in the preview windows
         Group {
             LandmarkRow(landmark: landmarks[0])
-            LandmarkRow(landmark: landmarks[1])
+//            LandmarkRow(landmark: landmarks[1])
         }
         .previewLayout(.fixed(width: 300, height: 70))
     }
